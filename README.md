@@ -12,6 +12,8 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │       ├── hosts             # Inventory file (INI)
 │       └── group_vars/
 │           └── aws_hosts.yml # Group variables
+├── playbooks/
+│   └── install-packages.yml  # Install common packages
 └── README.md
 ```
 
@@ -21,6 +23,17 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 |------|----|----|------|
 | amazon-linux | 51.21.254.58 | Amazon Linux | ec2-user |
 | ubuntu | 13.51.157.77 | Ubuntu 26.06 | ubuntu |
+
+## Playbooks
+
+| Playbook | Description |
+|----------|-------------|
+| `install-packages.yml` | Install common packages (mc, net-tools, curl, wget, git, vim, htop, unzip, tree, nano) |
+
+### Run playbook
+```bash
+ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts
+```
 
 ## Quick Start
 
@@ -32,11 +45,6 @@ ansible aws_hosts -i inventory/production/hosts -m ping
 ### Run ad-hoc command
 ```bash
 ansible aws_hosts -i inventory/production/hosts -m shell -a "uptime"
-```
-
-### Run playbook
-```bash
-ansible-playbook playbooks/site.yml -i inventory/production/hosts
 ```
 
 ## SSH Key
