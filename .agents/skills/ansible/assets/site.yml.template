@@ -1,0 +1,45 @@
+---
+# Main playbook - Site.yml
+# Usage: ansible-playbook playbooks/site.yml
+
+- name: Apply common configuration to all hosts
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: Display system information
+      ansible.builtin.debug:
+        msg: "Host: {{ inventory_hostname }} | OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: Ensure required system packages are installed
+      ansible.builtin.package:
+        name:
+          - curl
+          - wget
+          - git
+          - vim
+          - htop
+        state: present
+      tags: packages
+
+    - name: Configure timezone
+      ansible.builtin.timezone:
+        name: UTC
+      tags: config
+
+- name: Configure web servers
+  hosts: webservers
+  become: yes
+
+  roles:
+    - common
+    - webserver
+
+- name: Configure database servers
+  hosts: dbservers
+  become: yes
+
+  roles:
+    - common
+    - database

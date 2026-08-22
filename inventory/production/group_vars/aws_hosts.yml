@@ -1,0 +1,8 @@
+---
+# AWS Hosts Group Variables
+common_packages:
+  - curl
+  - wget
+  - git
+  - vim
+  - htop
