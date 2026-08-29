@@ -75,7 +75,7 @@ On Windows machine (PowerShell as Administrator):
 Test connection:
 
 ```bash
-ansible windows_hosts -i inventory/production/hosts -m ping --ask-vault-pass
+ansible windows_hosts -i inventory/production/hosts -m win_ping --ask-vault-pass
 ```
 
 ## Agent Skills
