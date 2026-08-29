@@ -1,0 +1,4 @@
+---
+# Encrypt this file on the server with:
+# ansible-vault encrypt_string 'Qwerty-1' --name 'ansible_password'
+ansible_password: Qwerty-1

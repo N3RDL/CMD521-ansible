@@ -11,10 +11,11 @@
 
 ## Inventory
 
-| Host | IP | User |
-|------|----|----|
-| amazon-linux | 13.60.184.149 | ec2-user |
-| ubuntu | 16.171.193.140 | ubuntu |
+| Host | IP | User | OS |
+|------|----|----|-----|
+| amazon-linux | 13.60.184.149 | ec2-user | Amazon Linux |
+| ubuntu | 16.171.193.140 | ubuntu | Ubuntu |
+| windows | 10.10.33.122 | master | Windows |
 
 ## Ansible Rules
 
@@ -72,7 +73,9 @@
 │   └── production/
 │       ├── hosts              # Inventory file (INI)
 │       └── group_vars/
-│           └── aws_hosts.yml  # Group variables
+│           ├── aws_hosts.yml  # Group variables
+│           ├── windows_hosts.yml         # Windows variables
+│           └── windows_hosts_vault.yml   # Encrypted password
 ├── playbooks/
 │   ├── install-packages.yml   # Install common packages (uses role)
 │   └── roles/

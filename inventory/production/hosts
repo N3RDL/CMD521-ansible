@@ -8,3 +8,12 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_python_interpreter=/usr/bin/python3
 ansible_become=yes
 ansible_become_method=sudo
+
+[windows_hosts]
+windows    ansible_host=10.10.33.122    ansible_user=master
+
+[windows_hosts:vars]
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
+ansible_port=5986
