@@ -32,7 +32,12 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 
 ### Run playbook
 ```bash
+# Default (all aws_hosts):
 ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts
+
+# Target specific host:
+ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "hosts=ubuntu"
+ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "hosts=amazon-linux"
 ```
 
 ## Quick Start
