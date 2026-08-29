@@ -2,26 +2,5 @@
 - name: Install common packages
   hosts: "{{ hosts | default('aws_hosts') }}"
   become: yes
-  vars:
-    common_packages:
-      - mc
-      - net-tools
-      - wget
-      - git
-      - vim
-      - htop
-      - unzip
-      - tree
-      - nano
-
-  tasks:
-    - name: Update package cache (Debian)
-      ansible.builtin.apt:
-        update_cache: yes
-      when: ansible_os_family == "Debian"
-
-    - name: Install packages
-      ansible.builtin.package:
-        name: "{{ item }}"
-        state: present
-      loop: "{{ common_packages }}"
+  roles:
+    - common

@@ -73,7 +73,13 @@
 │       └── group_vars/
 │           └── aws_hosts.yml  # Group variables
 ├── playbooks/
-│   └── install-packages.yml   # Install common packages
+│   └── install-packages.yml   # Install common packages (uses role)
+├── roles/
+│   └── common/
+│       ├── defaults/
+│       │   └── main.yml       # Default variables (common_packages)
+│       └── tasks/
+│           └── main.yml       # Role tasks
 └── .agents/
     └── skills/
         ├── ansible/           # Ansible skill + references

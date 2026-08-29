@@ -1,0 +1,11 @@
+---
+common_packages:
+  - mc
+  - net-tools
+  - wget
+  - git
+  - vim
+  - htop
+  - unzip
+  - tree
+  - nano

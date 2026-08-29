@@ -13,7 +13,11 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │       └── group_vars/
 │           └── aws_hosts.yml # Group variables
 ├── playbooks/
-│   └── install-packages.yml  # Install common packages
+│   └── install-packages.yml  # Install common packages (uses role)
+├── roles/
+│   └── common/
+│       ├── defaults/main.yml # Default variables
+│       └── tasks/main.yml    # Role tasks
 └── README.md
 ```
 
