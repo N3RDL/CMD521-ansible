@@ -74,7 +74,7 @@
 │       ├── hosts              # Inventory file (INI)
 │       └── group_vars/
 │           ├── aws_hosts.yml  # Group variables
-│           └── windows_hosts_vault.yml   # Encrypted password
+│           └── windows_hosts.yml   # Windows password (encrypted)
 ├── playbooks/
 │   ├── install-packages.yml   # Install common packages (uses role)
 │   └── roles/
