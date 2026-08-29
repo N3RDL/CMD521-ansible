@@ -22,12 +22,12 @@
 
 - NEVER hardcode `hosts:` value — always use variables with defaults:
   ```yaml
-  hosts: "{{ hosts | default('aws_hosts') }}"
+  hosts: "{{ target_hosts | default('aws_hosts') }}"
   ```
 - Apply the same pattern for other key play-level fields (`become`, etc.)
 - Users pass parameters via `-e`:
   ```bash
-  ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "hosts=ubuntu"
+  ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "target_hosts=ubuntu"
   ```
 
 ### Playbook Standards
@@ -74,13 +74,13 @@
 │       └── group_vars/
 │           └── aws_hosts.yml  # Group variables
 ├── playbooks/
-│   └── install-packages.yml   # Install common packages (uses role)
-├── roles/
-│   └── common/
-│       ├── defaults/
-│       │   └── main.yml       # Default variables (common_packages)
-│       └── tasks/
-│           └── main.yml       # Role tasks
+│   ├── install-packages.yml   # Install common packages (uses role)
+│   └── roles/
+│       └── common/
+│           ├── defaults/
+│           │   └── main.yml   # Default variables (common_packages)
+│           └── tasks/
+│               └── main.yml   # Role tasks
 └── .agents/
     └── skills/
         ├── ansible/           # Ansible skill + references
@@ -100,7 +100,7 @@ ansible-playbook playbooks/<file>.yml --check --diff
 ansible-lint playbooks/<file>.yml
 
 # Run with custom host target
-ansible-playbook playbooks/<file>.yml -i inventory/production/hosts -e "hosts=<target>"
+ansible-playbook playbooks/<file>.yml -i inventory/production/hosts -e "target_hosts=<target>"
 ```
 
 ## Troubleshooting

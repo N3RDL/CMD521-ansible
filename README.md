@@ -13,11 +13,11 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │       └── group_vars/
 │           └── aws_hosts.yml # Group variables
 ├── playbooks/
-│   └── install-packages.yml  # Install common packages (uses role)
-├── roles/
-│   └── common/
-│       ├── defaults/main.yml # Default variables
-│       └── tasks/main.yml    # Role tasks
+│   ├── install-packages.yml  # Install common packages (uses role)
+│   └── roles/
+│       └── common/
+│           ├── defaults/main.yml # Default variables
+│           └── tasks/main.yml    # Role tasks
 └── README.md
 ```
 
@@ -40,8 +40,8 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts
 
 # Target specific host:
-ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "hosts=ubuntu"
-ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "hosts=amazon-linux"
+ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "target_hosts=ubuntu"
+ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "target_hosts=amazon-linux"
 ```
 
 ## Quick Start
