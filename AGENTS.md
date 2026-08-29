@@ -60,6 +60,7 @@
   ```
 - Branch: `main` (primary)
 - Always run lint before committing
+- NEVER auto-push — always ask user for permission before `git push`
 
 ## File Structure
 
