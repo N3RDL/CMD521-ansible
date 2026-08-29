@@ -12,7 +12,6 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │       ├── hosts             # Inventory file (INI)
 │       └── group_vars/
 │           ├── aws_hosts.yml
-│           ├── windows_hosts.yml
 │           └── windows_hosts_vault.yml
 ├── playbooks/
 │   ├── install-packages.yml  # Install common packages (uses role)
