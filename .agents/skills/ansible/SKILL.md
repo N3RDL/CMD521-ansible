@@ -97,6 +97,75 @@ project/
 - Use `changed_when` and `failed_when` for better reporting
 - Include `--diff` output in tasks that modify files
 
+## Windows Automation
+
+### Required Collections
+
+```bash
+ansible-galaxy collection install ansible.windows
+ansible-galaxy collection install chocolatey.chocolatey
+```
+
+### Connection Setup
+
+```ini
+[windows_hosts]
+windows    ansible_host=10.10.33.122    ansible_user=master
+
+[windows_hosts:vars]
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
+ansible_port=5986
+```
+
+### Windows Modules
+
+| Module | Purpose |
+|--------|---------|
+| `ansible.windows.win_ping` | Test connection (NOT `ping`) |
+| `ansible.windows.win_shell` | Run PowerShell commands |
+| `ansible.windows.win_package` | Install MSI/EXE packages |
+| `chocolatey.chocolatey.win_chocolatey` | Chocolatey package manager |
+
+### Windows Example Playbook
+
+```yaml
+---
+- name: Install common Windows packages
+  hosts: "{{ target_hosts | default('windows_hosts') }}"
+  roles:
+    - windows-common
+```
+
+### Windows Role Example
+
+```yaml
+# roles/windows-common/tasks/main.yml
+---
+- name: Install Chocolatey
+  ansible.windows.win_shell: |
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+  args:
+    creates: C:\ProgramData\chocolatey\bin\choco.exe
+
+- name: Install Windows packages
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ windows_packages }}"
+```
+
+### Windows Gotchas
+
+- `become: yes` uses `sudo` by default — use `become_method: ansible.builtin.runas` for Windows
+- `ping` module doesn't work on Windows — use `win_ping`
+- `ansible.windows.win_chocolatey` doesn't exist — use `chocolatey.chocolatey.win_chocolatey`
+- Always pass `--ask-vault-pass` for Windows playbooks
+- WinRM port 5986 (HTTPS) is standard
+
 ### Example Playbook
 
 ```yaml

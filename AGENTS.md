@@ -42,6 +42,15 @@
 - Use `changed_when` and `failed_when` for better reporting
 - Prefer `ansible.builtin.package` over distro-specific modules when possible
 
+### Windows-Specific Rules
+
+- Use `win_ping` instead of `ping` for Windows hosts
+- Use `chocolatey.chocolatey.win_chocolatey` for package management (NOT `ansible.windows.win_chocolatey`)
+- Use `become_method: ansible.builtin.runas` for Windows (NOT `sudo`)
+- WinRM connection uses port 5986 (HTTPS)
+- Windows inventory group: `windows_hosts`
+- Always pass `--ask-vault-pass` for Windows playbooks
+
 ### Task Structure
 
 - **Play names**: action-oriented (e.g., "Install and configure nginx")
