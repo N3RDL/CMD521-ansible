@@ -83,6 +83,8 @@
 │           │   └── main.yml   # Default variables (common_packages)
 │           └── tasks/
 │               └── main.yml   # Role tasks
+├── scripts/
+│   └── setup-winrm.ps1        # Windows WinRM setup script
 └── .agents/
     └── skills/
         ├── ansible/           # Ansible skill + references

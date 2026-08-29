@@ -19,6 +19,8 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │       └── common/
 │           ├── defaults/main.yml # Default variables
 │           └── tasks/main.yml    # Role tasks
+├── scripts/
+│   └── setup-winrm.ps1       # Windows WinRM setup
 └── README.md
 ```
 
@@ -61,6 +63,20 @@ ansible aws_hosts -i inventory/production/hosts -m shell -a "uptime"
 ## SSH Key
 
 Private key location: `/home/master/ansible/keys/Stockholm_3.pem`
+
+## Windows WinRM Setup
+
+On Windows machine (PowerShell as Administrator):
+
+```powershell
+.\scripts\setup-winrm.ps1
+```
+
+Test connection:
+
+```bash
+ansible windows_hosts -i inventory/production/hosts -m ping --ask-vault-pass
+```
 
 ## Agent Skills
 
