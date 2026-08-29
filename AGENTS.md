@@ -76,13 +76,19 @@
 │           ├── aws_hosts.yml  # Group variables
 │           └── windows_hosts.yml   # Windows password (encrypted)
 ├── playbooks/
-│   ├── install-packages.yml   # Install common packages (uses role)
+│   ├── install-packages.yml           # Install common packages (uses role)
+│   ├── install-windows-packages.yml   # Install Windows packages (uses role)
 │   └── roles/
-│       └── common/
+│       ├── common/
+│       │   ├── defaults/
+│       │   │   └── main.yml           # Default variables (common_packages)
+│       │   └── tasks/
+│       │       └── main.yml           # Role tasks
+│       └── windows-common/
 │           ├── defaults/
-│           │   └── main.yml   # Default variables (common_packages)
+│           │   └── main.yml           # Default variables (windows_packages)
 │           └── tasks/
-│               └── main.yml   # Role tasks
+│               └── main.yml           # Role tasks
 ├── scripts/
 │   └── setup-winrm.ps1        # Windows WinRM setup script
 └── .agents/

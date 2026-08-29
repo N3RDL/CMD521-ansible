@@ -1,0 +1,7 @@
+---
+windows_packages:
+  - googlechrome
+  - winrar
+  - wireshark
+  - notepadplusplus
+  - git

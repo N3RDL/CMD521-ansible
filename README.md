@@ -14,11 +14,15 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 │           ├── aws_hosts.yml
 │           └── windows_hosts.yml
 ├── playbooks/
-│   ├── install-packages.yml  # Install common packages (uses role)
+│   ├── install-packages.yml           # Install Linux packages (uses role)
+│   ├── install-windows-packages.yml   # Install Windows packages (uses role)
 │   └── roles/
-│       └── common/
-│           ├── defaults/main.yml # Default variables
-│           └── tasks/main.yml    # Role tasks
+│       ├── common/                    # Linux role
+│       │   ├── defaults/main.yml
+│       │   └── tasks/main.yml
+│       └── windows-common/            # Windows role
+│           ├── defaults/main.yml
+│           └── tasks/main.yml
 ├── scripts/
 │   └── setup-winrm.ps1       # Windows WinRM setup
 └── README.md
@@ -36,9 +40,10 @@ Ansible playbooks and infrastructure automation for AWS hosts.
 
 | Playbook | Description |
 |----------|-------------|
-| `install-packages.yml` | Install common packages (mc, net-tools, curl, wget, git, vim, htop, unzip, tree, nano) |
+| `install-packages.yml` | Install common Linux packages (mc, net-tools, curl, wget, git, vim, htop, unzip, tree, nano) |
+| `install-windows-packages.yml` | Install common Windows packages (Chrome, WinRAR, Wireshark, Notepad++, Git) |
 
-### Run playbook
+### Run Linux playbook
 ```bash
 # Default (all aws_hosts):
 ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts
@@ -46,6 +51,15 @@ ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts
 # Target specific host:
 ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "target_hosts=ubuntu"
 ansible-playbook playbooks/install-packages.yml -i inventory/production/hosts -e "target_hosts=amazon-linux"
+```
+
+### Run Windows playbook
+```bash
+# Default (all windows_hosts):
+ansible-playbook playbooks/install-windows-packages.yml -i inventory/production/hosts --ask-vault-pass
+
+# Target specific host:
+ansible-playbook playbooks/install-windows-packages.yml -i inventory/production/hosts -e "target_hosts=windows" --ask-vault-pass
 ```
 
 ## Quick Start
