@@ -1,11 +1,11 @@
 ---
 - name: Install Chocolatey
-  ansible.windows.win_chocolatey:
+  chocolatey.chocolatey.win_chocolatey:
     name: chocolatey
     state: present
 
 - name: Install Windows packages
-  ansible.windows.win_chocolatey:
+  chocolatey.chocolatey.win_chocolatey:
     name: "{{ item }}"
     state: present
   loop: "{{ windows_packages }}"
