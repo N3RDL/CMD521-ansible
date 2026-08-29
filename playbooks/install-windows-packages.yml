@@ -2,5 +2,6 @@
 - name: Install common Windows packages
   hosts: "{{ target_hosts | default('windows_hosts') }}"
   become: yes
+  become_method: ansible.builtin.runas
   roles:
     - windows-common
