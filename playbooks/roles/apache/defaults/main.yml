@@ -1,0 +1,4 @@
+---
+apache_state: started
+apache_enabled: yes
+apache_port: 80

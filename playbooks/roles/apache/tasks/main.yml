@@ -1,0 +1,44 @@
+---
+- name: Fail on unsupported OS family
+  ansible.builtin.fail:
+    msg: "Unsupported OS family: {{ ansible_os_family }}. Supported: Debian, RedHat."
+  when: ansible_os_family not in ['Debian', 'RedHat']
+
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Update apt cache (Debian)
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+- name: Install Apache web server package
+  ansible.builtin.package:
+    name: "{{ apache_package }}"
+    state: present
+
+- name: Deploy custom index.html page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ apache_doc_root }}/index.html"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart apache
+
+- name: Ensure Apache service is running and enabled
+  ansible.builtin.service:
+    name: "{{ apache_service }}"
+    state: "{{ apache_state }}"
+    enabled: "{{ apache_enabled }}"
+
+- name: Check that Apache answers on port 80
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ apache_port }}/"
+    return_content: no
+  register: apache_check
+
+- name: Show check result
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }} ({{ ansible_distribution }}): {{ apache_service }} is {{ apache_state }}, HTTP {{ apache_check.status }}"

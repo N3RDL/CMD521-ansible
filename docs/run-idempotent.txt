@@ -1,0 +1,47 @@
+
+PLAY [Install and configure Apache (HTTPD) web server] *************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [amazon-linux]
+ok: [ubuntu]
+
+TASK [apache : Fail on unsupported OS family] **********************************
+skipping: [amazon-linux]
+skipping: [ubuntu]
+
+TASK [apache : Include OS-specific variables] **********************************
+ok: [amazon-linux]
+ok: [ubuntu]
+
+TASK [apache : Update apt cache (Debian)] **************************************
+skipping: [amazon-linux]
+ok: [ubuntu]
+
+TASK [apache : Install Apache web server package] ******************************
+ok: [ubuntu]
+ok: [amazon-linux]
+
+TASK [apache : Deploy custom index.html page] **********************************
+ok: [ubuntu]
+ok: [amazon-linux]
+
+TASK [apache : Ensure Apache service is running and enabled] *******************
+ok: [ubuntu]
+ok: [amazon-linux]
+
+TASK [apache : Check that Apache answers on port 80] ***************************
+ok: [ubuntu]
+ok: [amazon-linux]
+
+TASK [apache : Show check result] **********************************************
+ok: [amazon-linux] => {
+    "msg": "amazon-linux (Amazon): httpd is started, HTTP 200"
+}
+ok: [ubuntu] => {
+    "msg": "ubuntu (Ubuntu): apache2 is started, HTTP 200"
+}
+
+PLAY RECAP *********************************************************************
+amazon-linux               : ok=7    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+ubuntu                     : ok=8    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

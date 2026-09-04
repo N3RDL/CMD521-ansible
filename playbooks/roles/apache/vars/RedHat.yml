@@ -1,0 +1,5 @@
+---
+apache_package: httpd
+apache_service: httpd
+apache_conf_dir: /etc/httpd
+apache_doc_root: /var/www/html

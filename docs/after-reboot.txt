@@ -1,0 +1,10 @@
+ubuntu | CHANGED | rc=0 >>
+up 0 minutes
+enabled
+active
+http=200
+amazon-linux | CHANGED | rc=0 >>
+up 0 minutes
+enabled
+active
+http=200

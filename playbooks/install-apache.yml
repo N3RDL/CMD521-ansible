@@ -1,0 +1,6 @@
+---
+- name: Install and configure Apache (HTTPD) web server
+  hosts: "{{ target_hosts | default('aws_hosts') }}"
+  become: yes
+  roles:
+    - apache
